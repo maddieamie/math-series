@@ -1,5 +1,5 @@
 import pytest
-from series import fibonacci, fibonacci2, lucas, sum_series
+from ..math_series.series import fibonacci, fibonacci2, lucas, sum_series
 
 # Fibonacci Tests
 
@@ -62,6 +62,12 @@ def test_fibonacci2_five():
     expected = 13
     assert actual == expected
 
+
+def test_fibonacci_big_number():
+    actual = fibonacci(250), fibonacci2(250)
+    expected = 7896325765257458459393801417807495891023947183947776
+    assert actual == expected
+
 # Lucas Tests
 
 # starting term in lucas is 2
@@ -86,6 +92,11 @@ def test_lucas_three():
 def test_lucas_four():
     actual = lucas(7)
     expected = 29
+    assert actual == expected
+
+def test_lucas_big_number():
+    actual = lucas(250)
+    expected = 17656721319717734662791328845675730903632844218828123
     assert actual == expected
 
 # Sum series function
@@ -153,3 +164,18 @@ def test_sum_series_twelve():
     actual = sum_series(4, 3, 2)
     expected = 12
     assert actual == expected, "should follow series formula of sum of two previous terms"
+
+# test cases for float numbers
+
+def test_sum_series_float_numbers():
+    with pytest.raises(TypeError):
+        sum_series(3, 0.33, 1.3), "Test numbers should be whole numbers"
+
+def test_lucas_float_numbers():
+    with pytest.raises(TypeError):
+        lucas(3, 0.33, 1.3), "Test numbers should be whole numbers"
+
+def test_fibonacci_float_numbers():
+    with pytest.raises(TypeError):
+        fibonacci(3, 0.33, 1.3), "Test numbers should be whole numbers"
+        fibonacci2(3, 0.33, 1.3), "Test numbers should be whole numbers"
