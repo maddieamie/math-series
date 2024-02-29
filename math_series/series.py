@@ -1,3 +1,5 @@
+import sys
+
 def fibonacci(n):
     """
     :param n: term number in Fibonacci series
@@ -29,6 +31,7 @@ def fibonacci2(n):
             current_term = previous_term + two_terms_before_current
             two_terms_before_current = previous_term
             previous_term = current_term
+            return current_term
 
 
 def lucas(n):
@@ -48,6 +51,7 @@ def lucas(n):
             current_term = previous_term + two_terms_before_current
             two_terms_before_current = previous_term
             previous_term = current_term
+            return current_term
     else:
         return lucas(n - 1) + lucas(n - 2)
 
@@ -55,22 +59,20 @@ def lucas(n):
 def sum_series(term_num, starting_term=0, first_term=1):
     """
     :param term_num: term number in defined series
-    :no optional params: will produce values from fibonacci series
-    :optional params: 2 & 1 will produce values from lucas series, 0 & 1 will produce fibonacci anyway
-    :return: (term_num-1) + (term_num-2), where starting_term = starting term & first_term = first term
-    *if n>= 10, return will be iterative
+    :param starting_term: The starting term of the series (optional, default=0)
+    :param first_term: The first term of the series (optional, default=1)
+    :return: The nth term of the series
+
 
     """
     if term_num <= 0:
         return starting_term
     elif term_num == 1:
         return first_term
-    elif term_num >= 10:
+    else:
         previous_term = first_term
         two_terms_before_current = starting_term
         for _ in range(2, term_num + 1):
             current_term = previous_term + two_terms_before_current
             two_terms_before_current = previous_term
             previous_term = current_term
-    else:
-        sum_series(term_num - 1) + sum_series(term_num - 2)
